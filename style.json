@@ -11,7 +11,7 @@
     "vector": {
       "type": "vector",
       "tiles": [
-        https://mghs15.github.io/canoe-vector/xyz/v1/{z}/{x}/{y}.pbf"
+        "https://mghs15.github.io/canoe-vector/xyz/v1/{z}/{x}/{y}.pbf"
       ],
       "maxzoom": 14,
       "minzoom": 0,
