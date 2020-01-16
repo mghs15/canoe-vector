@@ -49,8 +49,8 @@
     <td>地図記号データ。ポイントデータ。地理院地図Vectorに倣った"ftCode"属性を持つ。</td> 
   </tr>
   <tr>
-    <td>symbol.geojson</td> 
-    <td>symbol</td> 
+    <td>text.geojson</td> 
+    <td>text</td> 
     <td>注記データ。ポイントデータ。地理院地図Vectorに倣った"knj"、"kana"属性を持つ。</td> 
   </tr>
 </table>
