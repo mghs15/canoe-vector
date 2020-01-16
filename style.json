@@ -1,0 +1,270 @@
+{"version": 8,"name": "Vector","metadata": {},
+"sources": {
+    "raster": {
+      "tileSize": 256,
+      "tiles": [
+        "https://mghs15.github.io/canoe-raster/xyz/raster-exp/{z}/{x}/{y}.png"
+      ],
+      "type": "raster",
+      "attribution": "出典:『大帝都市詳図』拾参號地・筆"
+    },
+    "vector": {
+      "type": "vector",
+      "tiles": [
+        https://mghs15.github.io/canoe-vector/xyz/v1/{z}/{x}/{y}.pbf"
+      ],
+      "maxzoom": 14,
+      "minzoom": 0,
+      "attribution": "出典:『大帝都市詳図』拾参號地・筆"
+    }
+}, 
+"sprite": "https://cyberjapandata.gsi.go.jp/vector/sprite/std",
+"glyphs": "https://cyberjapandata.gsi.go.jp/xyz/noto-jp/{fontstack}/{range}.pbf",
+"layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "rgba(200,200,255,1)"
+      },
+      "layout":{
+        "visibility":"visible"
+      }
+    },
+    {
+      "id": "raster",
+      "type": "raster",
+      "source": "raster",
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "raster-opacity": 0.8
+      },
+      "layout":{
+        "visibility":"visible"
+      }
+    },
+    {
+      "type":"fill",
+      "source":"vector",
+      "source-layer":"land",
+      "minzoom":0,"maxzoom":17,
+      "filter":[
+        "!has",
+        "sub"
+      ],
+      "paint":{
+        "fill-color":"rgba(255,255,255,1)"
+      },
+      "layout":{
+        "visibility":"visible"
+      },
+      "id":"land"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"land",
+      "minzoom":0,"maxzoom":17,
+      "filter":[
+        "!has",
+        "sub"
+      ],
+      "paint":{
+        "line-color":"rgba(0,0,255,1)",
+        "line-width":1
+      },
+      "layout":{
+        "line-cap":"square",
+        "visibility":"visible"
+      },
+      "id":"coastline"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"elevation",
+      "minzoom":0,"maxzoom":17,
+      "paint":{
+        "line-color":"rgba(200,160,60,1)",
+        "line-width":[
+          "case",
+          ["==", 
+            ["%",
+              ["to-number", ["get", "alti"]],
+            50
+            ],
+          0], 2,
+          1
+        ]
+      },
+      "layout":{
+        "line-cap":"square",
+        "visibility":"visible"
+      },
+      "id":"contour"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"river",
+      "minzoom":0,"maxzoom":17,
+      "paint":{
+        "line-color":"rgba(0,0,255,1)",
+        "line-width":1
+      },
+      "layout":{
+        "line-cap":"square",
+        "visibility":"visible"
+      },
+      "id":"river"
+    },
+    {
+      "type":"fill",
+      "source":"vector",
+      "source-layer":"building",
+      "minzoom":0,"maxzoom":17,
+      "paint":{
+        "fill-color":["get", "_fillColor"]
+      },
+      "layout":{
+        "visibility":"visible"
+      },
+      "id":"building"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"road",
+      "minzoom":0,"maxzoom":17,
+      "paint":{
+        "line-color":"rgba(0,0,0,1)",
+        "line-width":5
+      },
+      "layout":{
+        "line-cap":"round",
+        "visibility":"visible"
+      },
+      "id":"road-outline"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"road",
+      "minzoom":0,"maxzoom":17,
+      "paint":{
+        "line-color":["get", "_color"],
+        "line-width":4
+      },
+      "layout":{
+        "line-cap":"round",
+        "visibility":"visible"
+      },
+      "id":"road"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"railway",
+      "minzoom":0,"maxzoom":17,
+      "paint":{
+        "line-color":"rgba(0,0,0,1)",
+        "line-width":5
+      },
+      "layout":{
+        "line-cap":"square",
+        "visibility":"visible"
+      },
+      "id":"railway"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"railway",
+      "minzoom":0,"maxzoom":17,
+      "paint":{
+        "line-color":"rgba(255,255,255,1)",
+        "line-width":4,
+        "line-dasharray":[4,4]
+      },
+      "layout":{
+        "line-cap":"square",
+        "visibility":"visible"
+      },
+      "id":"railway-whitedash1"
+    },
+    {
+      "type":"symbol",
+      "source":"vector",
+      "source-layer":"icon",
+      "minzoom":10,"maxzoom":17,
+      "paint":{
+      },
+      "layout":{
+        "icon-image":[
+          "case",
+          ["==", ["get", "ftCode"], "1402"], "市役所・東京都の区役所（都道府県所在都市以外）-20",
+          ["==", ["get", "ftCode"], "3201"], "官公署",
+          ["==", ["get", "ftCode"], "3211"], "交番",
+          ["==", ["get", "ftCode"], "3214"], "小学校",
+          ["==", ["get", "ftCode"], "3213"], "中学校",
+          ["==", ["get", "ftCode"], "3218"], "郵便局",
+          ["==", ["get", "ftCode"], "3221"], "灯台",
+          ["==", ["get", "ftCode"], "3231"], "神社",
+          ["==", ["get", "ftCode"], "3232"], "寺院",
+          ["==", ["get", "ftCode"], "3242"], "消防署",
+          ["==", ["get", "ftCode"], "3243"], "病院",
+          ["==", ["get", "ftCode"], "4104"], "記念碑",
+          ["==", ["get", "ftCode"], "6312"], "畑",
+          ["==", ["get", "ftCode"], "6314"], "果樹園",
+          ["==", ["get", "ftCode"], "6321"], "広葉樹林",
+          ["==", ["get", "ftCode"], "6327"], "荒地",
+          ["==", ["get", "ftCode"], "6361"], "港湾",
+          ["==", ["get", "ftCode"], "6362"], "漁港",
+          ["==", ["get", "ftCode"], "7102"], "三角点",
+          ["==", ["get", "ftCode"], "7103"], "水準点",
+          ["==", ["get", "ftCode"], "8103"], "発電所等",
+          ["==", ["get", "ftCode"], "8105"], "電波塔",
+          "地形-砂礫地（領域が不明瞭な場合）"
+        ],
+        "icon-size":{
+          "stops":[
+          [10, 0.5],
+          [15,1]
+          ]
+        },
+        "visibility":"visible"
+      },
+      "id":"icon"
+    },
+    {
+      "type":"symbol",
+      "source":"vector",
+      "source-layer":"text",
+      "minzoom":4,"maxzoom":17,
+      "paint":{
+        "text-color":"rgba(0,0,0,1)",
+        "text-halo-color":"rgba(255,255,255,1)",
+        "text-halo-width":1
+      },
+      "layout":{
+        "text-size":{"stops":[[12,11],[13,13],[14,15],[15,12],[16,24],[17,42]]},
+        "text-allow-overlap":true,
+        "text-pitch-alignment":"viewport",
+        "text-rotation-alignment":"viewport",
+        "icon-pitch-alignment":"auto",
+        "icon-rotation-alignment":"auto",
+        "text-field":["get","knj"],
+        "text-font":["NotoSansCJKjp-Regular"],
+        "symbol-placement":"point",
+        "icon-allow-overlap":true,
+        "text-keep-upright":true,
+        "symbol-z-order":"auto",
+        "text-max-width":100,
+        "visibility":"visible"
+      },
+      "id":"text"
+    }
+],
+"id": "gsi-raster"}

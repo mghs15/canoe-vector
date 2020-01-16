@@ -1,0 +1,14 @@
+{
+"name": "mbtiles/icon.mbtiles + mbtiles/text.mbtiles + mbtiles/elevation.mbtiles + mbtiles/land.mbtiles",
+"description": "mbtiles/land.mbtiles",
+"version": "2",
+"minzoom": "0",
+"maxzoom": "14",
+"center": "145.997314,33.897777,14",
+"bounds": "145.964355,33.870416,146.030273,33.961586",
+"type": "overlay",
+"format": "pbf",
+"generator": "tile-join v1.34.6",
+"generator_options": "tippecanoe -f -l icon -o mbtiles/icon.mbtiles icon.geojson '--drop-rate=1'; tippecanoe -f -l text -o mbtiles/text.mbtiles text.geojson '--drop-rate=1'; tippecanoe -f -l elevation -o mbtiles/elevation.mbtiles elevation.geojson; tippecanoe -f -l land -o mbtiles/land.mbtiles land.geojson; tile-join -f -o mbtiles/v.mbtiles mbtiles/elevation.mbtiles mbtiles/land.mbtiles mbtiles/icon.mbtiles mbtiles/text.mbtiles; tile-join -f -e v1tiles mbtiles/v.mbtiles --no-tile-compression",
+"json": "{\"vector_layers\": [ { \"id\": \"elevation\", \"description\": \"\", \"minzoom\": 3, \"maxzoom\": 14, \"fields\": {\"alti\": \"Number\"} }, { \"id\": \"icon\", \"description\": \"\", \"minzoom\": 0, \"maxzoom\": 14, \"fields\": {\"ftCode\": \"String\"} }, { \"id\": \"land\", \"description\": \"\", \"minzoom\": 4, \"maxzoom\": 14, \"fields\": {} }, { \"id\": \"text\", \"description\": \"\", \"minzoom\": 0, \"maxzoom\": 14, \"fields\": {\"ftCode\": \"String\", \"kana\": \"String\", \"knj\": \"String\"} } ],\"tilestats\": {\"layerCount\": 4,\"layers\": [{\"layer\": \"elevation\",\"count\": 96,\"geometry\": \"LineString\",\"attributeCount\": 1,\"attributes\": [{\"attribute\": \"alti\",\"count\": 5,\"type\": \"number\",\"values\": [100,20,40,60,80],\"min\": 20,\"max\": 100}]},{\"layer\": \"icon\",\"count\": 91,\"geometry\": \"Point\",\"attributeCount\": 1,\"attributes\": [{\"attribute\": \"ftCode\",\"count\": 3,\"type\": \"string\",\"values\": [\"3221\",\"3231\",\"6321\"]}]},{\"layer\": \"land\",\"count\": 27,\"geometry\": \"Polygon\",\"attributeCount\": 0,\"attributes\": []},{\"layer\": \"text\",\"count\": 30,\"geometry\": \"Point\",\"attributeCount\": 3,\"attributes\": [{\"attribute\": \"ftCode\",\"count\": 1,\"type\": \"string\",\"values\": [\"\"]},{\"attribute\": \"kana\",\"count\": 2,\"type\": \"string\",\"values\": [\"うたかた\",\"さちのへ\"]},{\"attribute\": \"knj\",\"count\": 2,\"type\": \"string\",\"values\": [\"幸舳島\",\"浮方嶋\"]}]}]}}"
+}

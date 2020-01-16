@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<title>Display a map</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.css' rel='stylesheet' />
+<style>
+body { margin:0; padding:0; }
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+</style>
+<style>
+#menu {
+    position: absolute;
+    left: 0.5em;
+    top: 0.5em; 
+    padding: 0.2em 0.5em;
+    margin: 0 0;
+    background: #ddeeff;
+    box-shadow: 0px 0px 0px 5px #ddeeff;
+    border: dashed 3px #aaccff;
+    width: 90%;
+    max-width: 350px;
+    font-family: 'Open Sans', sans-serif;
+}
+#features {
+    position: absolute;
+    left: 0.5em;
+    padding: 0.2em 0.5em;
+    top: 8em; 
+    max-height: 200px;
+    width: 90%;
+    max-width: 350px;
+    overflow: auto;
+    background: #ddeeff;
+    font-family: 'Open Sans', sans-serif;
+    word-wrap: break-word;
+}
+#features table td{
+    word-break : break-all;
+}
+</style>
+</head>
+<body>
+ 
+<div id='map'></div>
+
+<script>
+var map = new mapboxgl.Map({
+  container: 'map', // container id
+  hash: true, //add #position on URL
+  style: './style.json', // stylesheet location
+  center: [146.000233, 33.919859], // starting position [lng, lat]
+  zoom: 12, // starting zoom
+  maxZoom: 16.99,
+  localIdeographFontFamily: false
+});
+
+//UI
+map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+map.addControl(new mapboxgl.ScaleControl() );
+map.showTileBoundaries = true;
+map.showCollisionBoxes = false;
+
+
+</script>
+ 
+</body>
+</html>
