@@ -18,7 +18,7 @@
       "attribution": "出典:『大帝都市詳図』拾参號地・筆"
     }
 }, 
-"sprite": "https://cyberjapandata.gsi.go.jp/vector/sprite/std",
+"sprite": "https://mghs15.github.io/canoe-vector/sprite/std",
 "glyphs": "https://cyberjapandata.gsi.go.jp/xyz/noto-jp/{fontstack}/{range}.pbf",
 "layers": [
     {
