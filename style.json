@@ -494,6 +494,7 @@
           ["==", ["get", "ftCode"], "3242"], "消防署",
           ["==", ["get", "ftCode"], "3243"], "病院",
           ["==", ["get", "ftCode"], "4104"], "記念碑",
+          ["==", ["get", "ftCode"], "6311"], "田",
           ["==", ["get", "ftCode"], "6312"], "畑",
           ["==", ["get", "ftCode"], "6314"], "果樹園",
           ["==", ["get", "ftCode"], "6321"], "広葉樹林",
@@ -535,8 +536,8 @@
         "text-halo-width":1
       },
       "layout":{
-        "text-size":{"stops":[[12,11],[13,13],[14,15],[15,12],[16,24],[17,42]]},
-        "text-variable-anchor":["left","top","center","right","bottom"],
+        "text-size":{"stops":[[12,18],[13,24],[14,32]]},
+        "text-variable-anchor":["center","left","top","right","bottom"],
         "text-radial-offset":1,
         "text-pitch-alignment":"viewport",
         "text-rotation-alignment":"viewport",
