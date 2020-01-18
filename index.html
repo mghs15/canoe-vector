@@ -6,6 +6,7 @@
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.css' rel='stylesheet' />
+<script src='./fill-pattern-image.js'></script>
 <style>
 body { margin:0; padding:0; }
 #map {
@@ -58,9 +59,12 @@ var map = new mapboxgl.Map({
   style: './style.json', // stylesheet location
   center: [146.000233, 33.919859], // starting position [lng, lat]
   zoom: 12, // starting zoom
-  maxZoom: 16.99,
-  localIdeographFontFamily: false
+  maxZoom: 16.99
+//  localIdeographFontFamily: false
 });
+
+//Add Images
+addFillPatternImages();
 
 //UI
 map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
