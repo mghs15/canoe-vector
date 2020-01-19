@@ -683,6 +683,36 @@
       "source":"vector",
       "source-layer":"text",
       "minzoom":4,"maxzoom":17,
+      "filter":["any",["==", "class", 2]],
+      "paint":{
+        "text-color":"rgba(100,100,100,1)",
+        "text-halo-color":"rgba(255,255,255,1)",
+        "text-halo-width":1
+      },
+      "layout":{
+        "text-size":{"stops":[[12,12],[13,18],[14,24]]},
+        "text-variable-anchor":["center","left","bottom","center","right","top"],
+        "text-pitch-alignment":"viewport",
+        "text-rotation-alignment":"viewport",
+        "icon-pitch-alignment":"auto",
+        "icon-rotation-alignment":"auto",
+        "text-field":["get","knj"],
+        "text-writing-mode":["vertical","horizontal"],
+        "text-font":["NotoSansCJKjp-Regular"],
+        "symbol-placement":"point",
+        "icon-allow-overlap":true,
+        "text-keep-upright":true,
+        "symbol-z-order":"auto",
+        "text-max-width":100,
+        "visibility":"visible"
+      },
+      "id":"text-poi"
+    },
+    {
+      "type":"symbol",
+      "source":"vector",
+      "source-layer":"text",
+      "minzoom":4,"maxzoom":17,
       "filter":["any",["==", "class", 0]],
       "paint":{
         "text-color":"rgba(0,0,255,1)",
@@ -737,36 +767,6 @@
         "visibility":"visible"
       },
       "id":"text-place"
-    },
-    {
-      "type":"symbol",
-      "source":"vector",
-      "source-layer":"text",
-      "minzoom":4,"maxzoom":17,
-      "filter":["any",["==", "class", 2]],
-      "paint":{
-        "text-color":"rgba(100,100,100,1)",
-        "text-halo-color":"rgba(255,255,255,1)",
-        "text-halo-width":1
-      },
-      "layout":{
-        "text-size":{"stops":[[12,12],[13,18],[14,24]]},
-        "text-variable-anchor":["center","left","bottom","center","right","top"],
-        "text-pitch-alignment":"viewport",
-        "text-rotation-alignment":"viewport",
-        "icon-pitch-alignment":"auto",
-        "icon-rotation-alignment":"auto",
-        "text-field":["get","knj"],
-        "text-writing-mode":["vertical","horizontal"],
-        "text-font":["NotoSansCJKjp-Regular"],
-        "symbol-placement":"point",
-        "icon-allow-overlap":true,
-        "text-keep-upright":true,
-        "symbol-z-order":"auto",
-        "text-max-width":100,
-        "visibility":"visible"
-      },
-      "id":"text-poi"
     },
     {
       "id": "raster",
