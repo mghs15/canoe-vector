@@ -592,8 +592,7 @@
       },
       "layout":{
         "text-size":{"stops":[[12,18],[13,24],[14,32]]},
-        "text-variable-anchor":["center","left","top","right","bottom"],
-        "text-radial-offset":1,
+        "text-anchor":"center",
         "text-pitch-alignment":"viewport",
         "text-rotation-alignment":"viewport",
         "icon-pitch-alignment":"auto",
