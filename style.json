@@ -5,13 +5,15 @@
       "tiles": [
         "https://mghs15.github.io/canoe-raster/xyz/raster-exp/{z}/{x}/{y}.png"
       ],
+      "maxzoom": 14,
+      "minzoom": 0,
       "type": "raster",
       "attribution": "出典:『大帝都市詳図』拾参號地・筆"
     },
     "vector": {
       "type": "vector",
       "tiles": [
-        "https://mghs15.github.io/canoe-vector/xyz/v1/{z}/{x}/{y}.pbf"
+        "https://mghs15.github.io/canoe-vector/xyz/v1tiles/{z}/{x}/{y}.pbf"
       ],
       "maxzoom": 14,
       "minzoom": 0,
@@ -158,10 +160,6 @@
       "source":"vector",
       "source-layer":"land",
       "minzoom":0,"maxzoom":17,
-      "filter":[
-        "!has",
-        "sub"
-      ],
       "paint":{
         "line-color":"rgba(0,0,255,1)",
         "line-width":1
@@ -216,10 +214,6 @@
       "source":"vector",
       "source-layer":"waterarea",
       "minzoom":0,"maxzoom":17,
-      "filter":[
-        "!has",
-        "sub"
-      ],
       "paint":{
         "fill-color":"rgba(200,200,255,1)"
       },
@@ -233,10 +227,6 @@
       "source":"vector",
       "source-layer":"waterarea",
       "minzoom":0,"maxzoom":17,
-      "filter":[
-        "!has",
-        "sub"
-      ],
       "paint":{
         "line-color":"rgba(0,0,255,1)",
         "line-width":1
@@ -268,7 +258,7 @@
       "source":"vector",
       "source-layer":"building",
       "minzoom":0,"maxzoom":17,
-      "filter":["any",["==","class","a"],["==","lvOrder","c"]],
+      "filter":["any",["==","class","a"],["==","class","c"]],
       "paint":{
         "fill-color":"rgba(255,230,190,1)",
         "fill-outline-color":"rgb(255,135,75)"
@@ -362,7 +352,7 @@
       "source":"vector",
       "source-layer":"railway",
       "minzoom":0,"maxzoom":17,
-      "filter":["all",["==","railState",0]],
+      "filter":["all",["==","class",2],["==","railState",0]],
       "paint":{
         "line-color":"rgba(0,0,0,1)",
         "line-width":2
@@ -371,14 +361,14 @@
         "line-cap":"square",
         "visibility":"visible"
       },
-      "id":"railway"
+      "id":"railway-private"
     },
     {
       "type":"line",
       "source":"vector",
       "source-layer":"railway",
       "minzoom":0,"maxzoom":17,
-      "filter":["all",["==","railState",0]],
+      "filter":["all",["==","class",2],["==","railState",0]],
       "paint":{
         "line-color":"rgba(0,0,0,1)",
         "line-width":6,
@@ -388,7 +378,40 @@
         "line-cap":"square",
         "visibility":"visible"
       },
-      "id":"railway-dash1"
+      "id":"railway-private-dash"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"railway",
+      "minzoom":0,"maxzoom":17,
+      "filter":["all",["==","class",1],["==","railState",0]],
+      "paint":{
+        "line-color":"rgba(0,0,0,1)",
+        "line-width":4
+      },
+      "layout":{
+        "line-cap":"square",
+        "visibility":"visible"
+      },
+      "id":"railway-national"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"railway",
+      "minzoom":0,"maxzoom":17,
+      "filter":["all",["==","class",1],["==","railState",0]],
+      "paint":{
+        "line-color":"rgba(255,255,255,1)",
+        "line-width":3,
+        "line-dasharray": [4,4]
+      },
+      "layout":{
+        "line-cap":"square",
+        "visibility":"visible"
+      },
+      "id":"railway-national-dash"
     },
     {
       "type":"line",
@@ -497,20 +520,20 @@
       "paint":{
         "line-color":"rgba(0,0,0,1)",
         "line-width":1,
-        "line-gap-width":5
+        "line-gap-width":6
       },
       "layout":{
         "line-cap":"square",
         "visibility":"visible"
       },
-      "id":"railway-bridge"
+      "id":"railway-bridge-case"
     },
     {
       "type":"line",
       "source":"vector",
       "source-layer":"railway",
       "minzoom":0,"maxzoom":17,
-      "filter":["all",["==","railState",1]],
+      "filter":["all",["==","class",2],["==","railState",1]],
       "paint":{
         "line-color":"rgba(0,0,0,1)",
         "line-width":2
@@ -519,7 +542,40 @@
         "line-cap":"square",
         "visibility":"visible"
       },
-      "id":"railway-bridge-case2"
+      "id":"railway-private-bridge"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"railway",
+      "minzoom":0,"maxzoom":17,
+      "filter":["all",["==","class",1],["==","railState",1]],
+      "paint":{
+        "line-color":"rgba(0,0,0,1)",
+        "line-width":4
+      },
+      "layout":{
+        "line-cap":"square",
+        "visibility":"visible"
+      },
+      "id":"railway-national-bridge"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"railway",
+      "minzoom":0,"maxzoom":17,
+      "filter":["all",["==","class",1],["==","railState",1]],
+      "paint":{
+        "line-color":"rgba(255,255,255,1)",
+        "line-width":3,
+        "line-dasharray": [4,4]
+      },
+      "layout":{
+        "line-cap":"square",
+        "visibility":"visible"
+      },
+      "id":"railway-national-bridge-dash"
     },
     {
       "type":"symbol",
@@ -555,9 +611,9 @@
           ["==", ["get", "ftCode"], "6341"], "史跡・名勝・天然記念物",
           ["==", ["get", "ftCode"], "6361"], "港湾",
           ["==", ["get", "ftCode"], "6362"], "漁港",
-          ["==", ["get", "ftCode"], "7201"], "標高点（測点）",
           ["==", ["get", "ftCode"], "7102"], "三角点",
           ["==", ["get", "ftCode"], "7103"], "水準点",
+          ["==", ["get", "ftCode"], "7201"], "標高点（測点）",
           ["==", ["get", "ftCode"], "8103"], "発電所等",
           ["==", ["get", "ftCode"], "8105"], "電波塔",
           "砂礫地（領域が不明瞭な場合）"
@@ -569,9 +625,14 @@
           ]
         },
         "text-font":["NotoSansCJKjp-Regular"],
-        "text-field":["get","name"],
+        "text-field":[
+          "case",
+          ["!=", ["get","namevisible"], "false"],
+          ["get","name"],
+          ""
+        ],
         "text-size":{"stops":[[12,11],[13,13],[14,15],[15,12],[16,24],[17,42]]},
-        "text-variable-anchor":["left","top","center","right","bottom"],
+        "text-variable-anchor":["left","bottom","center","right","top"],
         "text-radial-offset":1,
         "text-writing-mode":["horizontal","vertical"],
         "icon-optional":true,
@@ -583,16 +644,54 @@
     {
       "type":"symbol",
       "source":"vector",
-      "source-layer":"text",
-      "minzoom":4,"maxzoom":17,
+      "source-layer":"icon",
+      "minzoom":10,"maxzoom":17,
+      "filter":["any",["==", "ftCode", "7102"],["==", "ftCode", "7103"]],
       "paint":{
         "text-color":"rgba(0,0,0,1)",
         "text-halo-color":"rgba(255,255,255,1)",
         "text-halo-width":1
       },
       "layout":{
-        "text-size":{"stops":[[12,18],[13,24],[14,32]]},
-        "text-anchor":"center",
+        "icon-image":[
+          "case",
+          ["==", ["get", "ftCode"], "7102"], "三角点",
+          ["==", ["get", "ftCode"], "7103"], "水準点",
+          "標高点（測点）"
+        ],
+        "icon-size":{
+          "stops":[
+          [10, 0.5],
+          [15,1]
+          ]
+        },
+        "icon-allow-overlap":true,
+        "text-font":["NotoSansCJKjp-Regular"],
+        "text-field":["get","alti"],
+        "text-size":{"stops":[[12,11],[13,13],[14,15],[15,12],[16,24],[17,42]]},
+        "text-variable-anchor":["left","bottom","center","right","top"],
+        "text-radial-offset":1,
+        "text-writing-mode":["horizontal","vertical"],
+        "icon-optional":true,
+        "text-optional":true,
+        "visibility":"visible"
+      },
+      "id":"cp"
+    },
+    {
+      "type":"symbol",
+      "source":"vector",
+      "source-layer":"text",
+      "minzoom":4,"maxzoom":17,
+      "filter":["any",["==", "class", 0]],
+      "paint":{
+        "text-color":"rgba(0,0,255,1)",
+        "text-halo-color":"rgba(255,255,255,1)",
+        "text-halo-width":1
+      },
+      "layout":{
+        "text-size":{"stops":[[12,12],[13,18],[14,24]]},
+        "text-variable-anchor":["center","left","bottom","right","top"],
         "text-pitch-alignment":"viewport",
         "text-rotation-alignment":"viewport",
         "icon-pitch-alignment":"auto",
@@ -607,7 +706,67 @@
         "text-max-width":100,
         "visibility":"visible"
       },
-      "id":"text"
+      "id":"text-nature"
+    },
+    {
+      "type":"symbol",
+      "source":"vector",
+      "source-layer":"text",
+      "minzoom":4,"maxzoom":17,
+      "filter":["any",["==", "class", 1]],
+      "paint":{
+        "text-color":"rgba(0,0,0,1)",
+        "text-halo-color":"rgba(255,255,255,1)",
+        "text-halo-width":1
+      },
+      "layout":{
+        "text-size":{"stops":[[12,18],[13,24],[14,32]]},
+        "text-variable-anchor":["center","left","bottom","center","right","top"],
+        "text-pitch-alignment":"viewport",
+        "text-rotation-alignment":"viewport",
+        "icon-pitch-alignment":"auto",
+        "icon-rotation-alignment":"auto",
+        "text-field":["get","knj"],
+        "text-writing-mode":["vertical","horizontal"],
+        "text-font":["NotoSansCJKjp-Regular"],
+        "symbol-placement":"point",
+        "icon-allow-overlap":true,
+        "text-keep-upright":true,
+        "symbol-z-order":"auto",
+        "text-max-width":100,
+        "visibility":"visible"
+      },
+      "id":"text-place"
+    },
+    {
+      "type":"symbol",
+      "source":"vector",
+      "source-layer":"text",
+      "minzoom":4,"maxzoom":17,
+      "filter":["any",["==", "class", 2]],
+      "paint":{
+        "text-color":"rgba(100,100,100,1)",
+        "text-halo-color":"rgba(255,255,255,1)",
+        "text-halo-width":1
+      },
+      "layout":{
+        "text-size":{"stops":[[12,12],[13,18],[14,24]]},
+        "text-variable-anchor":["center","left","bottom","center","right","top"],
+        "text-pitch-alignment":"viewport",
+        "text-rotation-alignment":"viewport",
+        "icon-pitch-alignment":"auto",
+        "icon-rotation-alignment":"auto",
+        "text-field":["get","knj"],
+        "text-writing-mode":["vertical","horizontal"],
+        "text-font":["NotoSansCJKjp-Regular"],
+        "symbol-placement":"point",
+        "icon-allow-overlap":true,
+        "text-keep-upright":true,
+        "symbol-z-order":"auto",
+        "text-max-width":100,
+        "visibility":"visible"
+      },
+      "id":"text-poi"
     },
     {
       "id": "raster",

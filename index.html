@@ -59,12 +59,55 @@ var map = new mapboxgl.Map({
   style: './style.json', // stylesheet location
   center: [146.000233, 33.919859], // starting position [lng, lat]
   zoom: 12, // starting zoom
-  maxZoom: 16.99
-//  localIdeographFontFamily: false
+  maxZoom: 16.99,
+  localIdeographFontFamily: ['Arial Unicode MS Regular']
 });
 
 //Add Images
 addFillPatternImages();
+
+//ポップアップ表示
+var popup = new mapboxgl.Popup();
+
+map.on('click', function(e) {
+  
+  if(map.getLayer('result-target')){
+    map.removeLayer('result-target');
+  }
+  
+
+  var features = map.queryRenderedFeatures(e.point);
+  if (!features.length) {
+    popup.remove();
+    return;
+  }
+  
+//  console.log(e);
+  
+  var htmlString = ""
+  
+  for(i in features){
+    var feature = features[i];
+    console.log(feature);
+    var featureProperties = "<table>";
+    for(name in feature.properties){
+        featureProperties = featureProperties + "<tr><td style='vertical-align:top; color:#0000ff;'>" + name + "</td>";
+        featureProperties = featureProperties + "<td style='color:#000000;'>" + feature.properties[name] + "</td></tr>";
+    }
+    featureProperties = featureProperties +  "</table>";
+    
+    htmlString = htmlString + "<span style='font-weight:bold;' >" + feature.sourceLayer + "</span>" + featureProperties;
+    //htmlString = htmlString + "<br>データソース：" + feature.sourceLayer + "<br>--属性値：" + JSON.stringify( feature.properties );
+    //レイヤID => feature.layer.id
+  }
+  
+
+  popup.setLngLat([ e.lngLat.lng, e.lngLat.lat ])
+    .setHTML(htmlString)
+    .addTo(map);
+
+  map.getCanvas().style.cursor = features.length ? 'pointer' : '';
+});
 
 //UI
 map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
