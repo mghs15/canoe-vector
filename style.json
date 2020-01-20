@@ -450,7 +450,7 @@
       "source":"vector",
       "source-layer":"road",
       "minzoom":0,"maxzoom":17,
-      "filter":["all",["==","class",1],["==","lvOrder",1]],
+      "filter":["all",["==","class",2],["==","lvOrder",1]],
       "paint":{
         "line-color":"rgba(0,0,0,1)",
         "line-width":1,
@@ -467,7 +467,7 @@
       "source":"vector",
       "source-layer":"road",
       "minzoom":0,"maxzoom":17,
-      "filter":["all",["==","class",1],["==","lvOrder",1]],
+      "filter":["all",["==","class",2],["==","lvOrder",1]],
       "paint":{
         "line-color":"rgba(100,100,100,1)",
         "line-width":4
@@ -483,7 +483,7 @@
       "source":"vector",
       "source-layer":"road",
       "minzoom":0,"maxzoom":17,
-      "filter":["all",["==","class",1],["==","lvOrder",1]],
+      "filter":["all",["==","class",2],["==","lvOrder",1]],
       "paint":{
         "line-color":"rgba(255,255,255,1)",
         "line-width":4
@@ -499,7 +499,7 @@
       "source":"vector",
       "source-layer":"road",
       "minzoom":0,"maxzoom":17,
-      "filter":["all",["==","class",0],["==","lvOrder",1]],
+      "filter":["all",["==","class",1],["==","lvOrder",1]],
       "paint":{
         "line-color":"rgba(0,0,0,1)",
         "line-width":1,
@@ -548,7 +548,7 @@
       "source":"vector",
       "source-layer":"road",
       "minzoom":0,"maxzoom":17,
-      "filter":["all",["==","class",1],["==","lvOrder",1]],
+      "filter":["all",["==","class",0],["==","lvOrder",1]],
       "paint":{
         "line-color":"rgba(0,0,0,1)",
         "line-width":1,
