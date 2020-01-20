@@ -288,7 +288,7 @@
       "source":"vector",
       "source-layer":"road",
       "minzoom":0,"maxzoom":17,
-      "filter":["all",["==","class",1],["==","lvOrder",0]],
+      "filter":["all",["==","class",2],["==","lvOrder",0]],
       "paint":{
         "line-color":"rgba(100,100,100,1)",
         "line-width":4
@@ -304,7 +304,7 @@
       "source":"vector",
       "source-layer":"road",
       "minzoom":0,"maxzoom":17,
-      "filter":["all",["==","class",1],["==","lvOrder",0]],
+      "filter":["all",["==","class",2],["==","lvOrder",0]],
       "paint":{
         "line-color":"rgba(255,255,255,1)",
         "line-width":3
@@ -320,6 +320,38 @@
       "source":"vector",
       "source-layer":"road",
       "minzoom":0,"maxzoom":17,
+      "filter":["all",["==","class",1],["==","lvOrder",0]],
+      "paint":{
+        "line-color":"rgba(100,100,100,1)",
+        "line-width":4
+      },
+      "layout":{
+        "line-cap":"butt",
+        "visibility":"visible"
+      },
+      "id":"road-primary-outline"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"road",
+      "minzoom":0,"maxzoom":17,
+      "filter":["all",["==","class",1],["==","lvOrder",0]],
+      "paint":{
+        "line-color":"rgba(255,255,0,1)",
+        "line-width":4
+      },
+      "layout":{
+        "line-cap":"round",
+        "visibility":"visible"
+      },
+      "id":"road-primary"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"road",
+      "minzoom":0,"maxzoom":17,
       "filter":["all",["==","class",0],["==","lvOrder",0]],
       "paint":{
         "line-color":"rgba(100,100,100,1)",
@@ -329,7 +361,7 @@
         "line-cap":"butt",
         "visibility":"visible"
       },
-      "id":"road-primary-outline"
+      "id":"road-highway-outline"
     },
     {
       "type":"line",
@@ -345,7 +377,7 @@
         "line-cap":"round",
         "visibility":"visible"
       },
-      "id":"road-primary"
+      "id":"road-highway-primary"
     },
     {
       "type":"line",
@@ -484,7 +516,7 @@
       "source":"vector",
       "source-layer":"road",
       "minzoom":0,"maxzoom":17,
-      "filter":["all",["==","class",0],["==","lvOrder",1]],
+      "filter":["all",["==","class",1],["==","lvOrder",1]],
       "paint":{
         "line-color":"rgba(100,100,100,1)",
         "line-width":5
@@ -500,6 +532,55 @@
       "source":"vector",
       "source-layer":"road",
       "minzoom":0,"maxzoom":17,
+      "filter":["all",["==","class",1],["==","lvOrder",1]],
+      "paint":{
+        "line-color":"rgba(255,255,0,1)",
+        "line-width":4
+      },
+      "layout":{
+        "line-cap":"round",
+        "visibility":"visible"
+      },
+      "id":"road-primary-bridge"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"road",
+      "minzoom":0,"maxzoom":17,
+      "filter":["all",["==","class",1],["==","lvOrder",1]],
+      "paint":{
+        "line-color":"rgba(0,0,0,1)",
+        "line-width":1,
+        "line-gap-width":3
+      },
+      "layout":{
+        "line-cap":"square",
+        "visibility":"visible"
+      },
+      "id":"road-highway-bridge-case"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"road",
+      "minzoom":0,"maxzoom":17,
+      "filter":["all",["==","class",0],["==","lvOrder",1]],
+      "paint":{
+        "line-color":"rgba(100,100,100,1)",
+        "line-width":5
+      },
+      "layout":{
+        "line-cap":"butt",
+        "visibility":"visible"
+      },
+      "id":"road-highway-bridge-outline"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"road",
+      "minzoom":0,"maxzoom":17,
       "filter":["all",["==","class",0],["==","lvOrder",1]],
       "paint":{
         "line-color":"rgba(235,130,120,1)",
@@ -509,7 +590,7 @@
         "line-cap":"round",
         "visibility":"visible"
       },
-      "id":"road-primary-bridge"
+      "id":"road-highway-bridge"
     },
     {
       "type":"line",
@@ -576,6 +657,56 @@
         "visibility":"visible"
       },
       "id":"railway-national-bridge-dash"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"road",
+      "minzoom":0,"maxzoom":17,
+      "filter":["all",["==","class",1000],["==","lvOrder",-1]],
+      "paint":{
+        "line-color":"rgba(235,130,120,1)",
+        "line-width":2,
+        "line-dasharray":[4,4]
+      },
+      "layout":{
+        "line-cap":"round",
+        "visibility":"visible"
+      },
+      "id":"road-highway-on-sea"
+    },
+    {
+      "type":"symbol",
+      "source":"vector",
+      "source-layer":"road",
+      "minzoom":10,"maxzoom":17,
+      "filter":["all",["any", ["==","class",0], ["==","class",1000]],["any", ["==","lvOrder",0],["==","lvOrder",-1]]],
+      "paint":{
+        "text-color":"rgba(255,255,255,1)"
+      },
+      "layout":{
+        "icon-image":"国道番号",
+        "icon-size":{
+          "stops":[
+          [10,1],
+          [15,1]
+          ]
+        },
+        "icon-allow-overlap":true,
+        "text-allow-overlap":true,
+        "symbol-placement": "line",
+        "icon-rotation-alignment":"viewport",
+        "text-rotation-alignment":"viewport",
+        "text-font":["NotoSansCJKjp-Regular"],
+        "text-field":["get","num"],
+        "text-size":{"stops":[[12,11],[13,13],[14,15],[15,12],[16,24],[17,42]]},
+        "text-anchor":"center",
+        "text-writing-mode":["horizontal","vertical"],
+        "icon-optional":true,
+        "text-optional":true,
+        "visibility":"visible"
+      },
+      "id":"road-highway-number"
     },
     {
       "type":"symbol",
