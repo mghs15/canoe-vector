@@ -288,10 +288,26 @@
       "source":"vector",
       "source-layer":"road",
       "minzoom":0,"maxzoom":17,
+      "filter":["all",["==","class",3],["==","lvOrder",0]],
+      "paint":{
+        "line-color":"rgba(200,200,200,1)",
+        "line-width":3
+      },
+      "layout":{
+        "line-cap":"round",
+        "visibility":"visible"
+      },
+      "id":"road-narrow"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"road",
+      "minzoom":0,"maxzoom":17,
       "filter":["all",["==","class",2],["==","lvOrder",0]],
       "paint":{
         "line-color":"rgba(100,100,100,1)",
-        "line-width":4
+        "line-width":5
       },
       "layout":{
         "line-cap":"butt",
@@ -307,7 +323,7 @@
       "filter":["all",["==","class",2],["==","lvOrder",0]],
       "paint":{
         "line-color":"rgba(255,255,255,1)",
-        "line-width":3
+        "line-width":4
       },
       "layout":{
         "line-cap":"round",
@@ -323,7 +339,7 @@
       "filter":["all",["==","class",1],["==","lvOrder",0]],
       "paint":{
         "line-color":"rgba(100,100,100,1)",
-        "line-width":4
+        "line-width":5
       },
       "layout":{
         "line-cap":"butt",
@@ -454,7 +470,7 @@
       "paint":{
         "line-color":"rgba(0,0,0,1)",
         "line-width":1,
-        "line-gap-width":3
+        "line-gap-width":6
       },
       "layout":{
         "line-cap":"square",
@@ -470,7 +486,7 @@
       "filter":["all",["==","class",2],["==","lvOrder",1]],
       "paint":{
         "line-color":"rgba(100,100,100,1)",
-        "line-width":4
+        "line-width":5
       },
       "layout":{
         "line-cap":"butt",
@@ -503,7 +519,7 @@
       "paint":{
         "line-color":"rgba(0,0,0,1)",
         "line-width":1,
-        "line-gap-width":3
+        "line-gap-width":6
       },
       "layout":{
         "line-cap":"square",
@@ -552,7 +568,7 @@
       "paint":{
         "line-color":"rgba(0,0,0,1)",
         "line-width":1,
-        "line-gap-width":3
+        "line-gap-width":6
       },
       "layout":{
         "line-cap":"square",
