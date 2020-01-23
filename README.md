@@ -3,57 +3,18 @@
 
 ※このレポジトリにおいて、架空地図と現実世界とのリンクについては考慮を行っておりません。当レポジトリ内では、架空地図の内容と実在の人物、地域、団体とは一切の関係はございません。
 
+## 架空地図配信ページ
+https://mghs15.github.io/canoe-vector/
 
 ## 元データの準備
 [地理院地図](https://maps.gsi.go.jp/)の作図機能およびQGISを使って、『大帝都市詳図』素図からベクトルデータを作成した。
 
-のちのち[Mapbox Vector Tile](https://github.com/mapbox/vector-tile-spec)に変換することを考え、Mapbox Vector Tileのレイヤに相当する架空データごとに１つのGeoJSONファイルに分離して作成した。
+のちのち[Mapbox Vector Tile](https://github.com/mapbox/vector-tile-spec)に変換することを考え、当初はMapbox Vector Tileのレイヤに相当する架空データごとに１つのGeoJSONファイルに分離して作成したが、
+データ作成・管理上、属性値の組み合わせ（例えば、道路種別＋階層レベル）ごとにGeoJSONを作成するようにしている。。
 
 基本的に<a href="https://github.com/gsi-cyberjapan/gsimaps-vector-experiment">地理院地図Vector</a>のデータ構造を参考にしつつ、設計している。
 
-取り急ぎ、現在のデータ設計は以下の通り。詳細は、データを作成しつつ、検討を加えていく予定。
-<table>
-  <tr>
-    <td>GeoJSONの名前</td> 
-    <td>Mapbox Vector Tile内のレイヤ名</td> 
-    <td>データの説明</td> 
-  </tr>
-  <tr>
-    <td>building.geojson</td> 
-    <td>building</td> 
-    <td>建物データ。ポリゴンデータ。（現在はまだデータとしては存在しない。）</td> 
-  </tr>
-  <tr>
-    <td>elevation.geojson</td> 
-    <td>elevation</td> 
-    <td>等高線データ。ラインデータ。とりあえず、"alti"属性に標高データが入っている。</td> 
-  </tr>
-  <tr>
-    <td>land.geojson</td> 
-    <td>land</td> 
-    <td>土地を表すポリゴンデータ。海岸線としても利用。</td> 
-  </tr>
-  <tr>
-    <td>railway.geojson</td> 
-    <td>railway</td> 
-    <td>鉄道データ。ラインデータ。（現在はまだデータとしては存在しない。）</td> 
-  </tr>
-  <tr>
-    <td>road.geojson</td> 
-    <td>road</td> 
-    <td>道路データ。ラインデータ。（現在はまだデータとしては存在しない。）</td> 
-  </tr>
-  <tr>
-    <td>icon.geojson</td> 
-    <td>icon</td> 
-    <td>地図記号データ。ポイントデータ。地理院地図Vectorに倣った"ftCode"属性を持つ。</td> 
-  </tr>
-  <tr>
-    <td>text.geojson</td> 
-    <td>text</td> 
-    <td>注記データ。ポイントデータ。地理院地図Vectorに倣った"knj"、"kana"属性を持つ。</td> 
-  </tr>
-</table>
+実際のデータの内容は、[DATA-SPEC.md](https://github.com/mghs15/canoe-vector/blob/master/DATA-SPEC.md)で検討を行う。
 
 ## Mapbox Vector Tile作成工程
 まず、mbtilesを入れておくディレクトリを作成する。
