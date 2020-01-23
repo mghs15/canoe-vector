@@ -61,7 +61,18 @@ tile-join -f -e vtiles v.mbtiles --no-tile-compression
 * すべての地物を作成したすべてのズームレベルのタイルに入れているが、後々、地物ごとに入れるべきズームレベルを制御する必要があるだろう。[やり方](https://github.com/mapbox/tippecanoe#zoom-levels)は`-zg -Z4`というように、z:maxzoom～Z:minzoomという形で指定する）。
 * 属性値の指定が面倒くさい（特に地理院地図の作図機能を利用する場合）ことを考えると、描画を分けたい地物については、どんどん別レイヤにしてしまったほうが良いかもしれない。
 * より情報量の多い地図を作成するには、架空データの属性値についても整理しなくてならない。（例：道路の幅員、高架など）
-
+* もしも、複数のGeoJSONをひとつのレイヤに入れる場合、それぞれのGeoJSONから別のmbtilesを作るのではなく、ひとつのmbtilesにまとめた方が処理が速い。
+```
+#属性値（種別・階層）ごとに作成したGeoJSONを"road.mbtiles"に"road"レイヤとして格納する。
+tippecanoe -f -l road -o mbtiles/road.mbtiles \
+  road-highway.geojson \
+  road-highway-bridge.geojson \
+  road-primary.geojson \
+  road-primary-bridge.geojson \
+  road-secondary.geojson \
+  road-secondary-bridge.geojson \
+  road-narrow.geojson
+```
 
 ## 備考
 TippecanoeはMacまたはLinux環境でないと動きません。しかしながら、Windows10にはWSL（Windows Subsystem for Linux）という、WindowsでLinuxコマンドを利用できるサービスがあります。これを用いることで、Windows10でTippecanoeを扱えるようになりました。ベクトルタイルの作成が非常にやりやすくなったといえます。WSLをオンにして、お好きなUbuntuをMicrosoft Storeから導入した後は、TippecanoeのレポジトリのUbuntu用の説明に従えばOKです。
