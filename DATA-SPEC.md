@@ -107,51 +107,6 @@
   </tr>
 </table>
 
-## 道路データ
-
-### レイヤ名
-`road`
-
-### 属性値
-
-`class` *number*
-
-<table>
-  <tr>
-    <td>0</td>
-    <td>国道</td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>主要道</td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>準主要道</td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>その他の道路</td>
-  </tr>
-  <tr>
-    <td>1000</td>
-    <td>海上国道</td>
-  </tr>
-</table>
-
-`lvOrder` *number*
-
-<table>
-  <tr>
-    <td>0</td>
-    <td>通常部</td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>高架・橋梁</td>
-  </tr>
-</table>
-
 ## 陸地データ
 
 ### レイヤ名
