@@ -238,7 +238,7 @@
 `ftCode` *string*
 
 <table>
-  <tr><td>"1402"</td><td>市役所・東京都の区役所（都道府県所在都市以外）-20</td></tr>
+  <tr><td>"1402"</td><td>市役所・区役所</td></tr>
   <tr><td>"3201"</td><td>官公署</td></tr>
   <tr><td>"3202"</td><td>裁判所</td></tr>
   <tr><td>"3211"</td><td>交番</td></tr>
