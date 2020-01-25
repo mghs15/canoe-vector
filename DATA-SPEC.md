@@ -62,7 +62,7 @@
   </tr>
 </table>
 
-`snglDbl *number*
+`snglDbl` *number*
 
 ※官営鉄道（class=1）のデータのみ
 
