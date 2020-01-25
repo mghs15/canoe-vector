@@ -40,11 +40,11 @@
 
 <table>
   <tr>
-    <td>0</td>
+    <td>1</td>
     <td>官営</td>
   </tr>
   <tr>
-    <td>1</td>
+    <td>2</td>
     <td>民営</td>
   </tr>
 </table>
@@ -59,6 +59,21 @@
   <tr>
     <td>1</td>
     <td>高架・橋梁</td>
+  </tr>
+</table>
+
+`snglDbl *number*
+
+※官営鉄道（class=1）のデータのみ
+
+<table>
+  <tr>
+    <td>0</td>
+    <td>単線</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>複線</td>
   </tr>
 </table>
 

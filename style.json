@@ -71,7 +71,7 @@
       "type":"fill",
       "source":"vector",
       "source-layer":"landuse-forest",
-      "minzoom":0,"maxzoom":17,
+      "minzoom":11,"maxzoom":17,
       "filter":[
         "!has",
         "sub"
@@ -106,7 +106,7 @@
       "type":"fill",
       "source":"vector",
       "source-layer":"landuse-grass",
-      "minzoom":0,"maxzoom":17,
+      "minzoom":11,"maxzoom":17,
       "filter":[
         "!has",
         "sub"
@@ -141,7 +141,7 @@
       "type":"fill",
       "source":"vector",
       "source-layer":"landuse-sand",
-      "minzoom":0,"maxzoom":17,
+      "minzoom":11,"maxzoom":17,
       "filter":[
         "!has",
         "sub"
@@ -287,7 +287,7 @@
       "type":"line",
       "source":"vector",
       "source-layer":"road",
-      "minzoom":0,"maxzoom":17,
+      "minzoom":11,"maxzoom":17,
       "filter":["all",["==","class",3],["==","lvOrder",0]],
       "paint":{
         "line-color":"rgba(200,200,200,1)",
@@ -303,7 +303,23 @@
       "type":"line",
       "source":"vector",
       "source-layer":"road",
-      "minzoom":0,"maxzoom":17,
+      "minzoom":0,"maxzoom":11,
+      "filter":["all",["==","class",2]],
+      "paint":{
+        "line-color":"rgba(200,200,200,1)",
+        "line-width":2
+      },
+      "layout":{
+        "line-cap":"round",
+        "visibility":"visible"
+      },
+      "id":"road-secondary-lowzoom"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"road",
+      "minzoom":11,"maxzoom":17,
       "filter":["all",["==","class",2],["==","lvOrder",0]],
       "paint":{
         "line-color":"rgba(100,100,100,1)",
@@ -319,7 +335,7 @@
       "type":"line",
       "source":"vector",
       "source-layer":"road",
-      "minzoom":0,"maxzoom":17,
+      "minzoom":11,"maxzoom":17,
       "filter":["all",["==","class",2],["==","lvOrder",0]],
       "paint":{
         "line-color":"rgba(255,255,255,1)",
@@ -393,7 +409,7 @@
         "line-cap":"round",
         "visibility":"visible"
       },
-      "id":"road-highway-primary"
+      "id":"road-highway"
     },
     {
       "type":"line",
@@ -449,7 +465,7 @@
       "source":"vector",
       "source-layer":"railway",
       "minzoom":0,"maxzoom":17,
-      "filter":["all",["==","class",1],["==","railState",0]],
+      "filter":["all",["==","class",1],["==","railState",0],["!=","snglDbl",1]],
       "paint":{
         "line-color":"rgba(255,255,255,1)",
         "line-width":3,
@@ -464,8 +480,25 @@
     {
       "type":"line",
       "source":"vector",
-      "source-layer":"road",
+      "source-layer":"railway",
       "minzoom":0,"maxzoom":17,
+      "filter":["all",["==","class",1],["==","railState",0],["==","snglDbl",1]],
+      "paint":{
+        "line-color":"rgba(255,255,255,1)",
+        "line-width":3,
+        "line-dasharray": [2,4,2,0.1]
+      },
+      "layout":{
+        "line-cap":"square",
+        "visibility":"visible"
+      },
+      "id":"railway-national-dash-dbl"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"road",
+      "minzoom":11,"maxzoom":17,
       "filter":["all",["==","class",2],["==","lvOrder",1]],
       "paint":{
         "line-color":"rgba(0,0,0,1)",
@@ -482,7 +515,7 @@
       "type":"line",
       "source":"vector",
       "source-layer":"road",
-      "minzoom":0,"maxzoom":17,
+      "minzoom":11,"maxzoom":17,
       "filter":["all",["==","class",2],["==","lvOrder",1]],
       "paint":{
         "line-color":"rgba(100,100,100,1)",
@@ -498,7 +531,7 @@
       "type":"line",
       "source":"vector",
       "source-layer":"road",
-      "minzoom":0,"maxzoom":17,
+      "minzoom":11,"maxzoom":17,
       "filter":["all",["==","class",2],["==","lvOrder",1]],
       "paint":{
         "line-color":"rgba(255,255,255,1)",
@@ -514,7 +547,7 @@
       "type":"line",
       "source":"vector",
       "source-layer":"road",
-      "minzoom":0,"maxzoom":17,
+      "minzoom":11,"maxzoom":17,
       "filter":["all",["==","class",1],["==","lvOrder",1]],
       "paint":{
         "line-color":"rgba(0,0,0,1)",
@@ -563,7 +596,7 @@
       "type":"line",
       "source":"vector",
       "source-layer":"road",
-      "minzoom":0,"maxzoom":17,
+      "minzoom":11,"maxzoom":17,
       "filter":["all",["==","class",0],["==","lvOrder",1]],
       "paint":{
         "line-color":"rgba(0,0,0,1)",
@@ -612,7 +645,7 @@
       "type":"line",
       "source":"vector",
       "source-layer":"railway",
-      "minzoom":0,"maxzoom":17,
+      "minzoom":11,"maxzoom":17,
       "filter":["all",["==","railState",1]],
       "paint":{
         "line-color":"rgba(0,0,0,1)",
@@ -662,7 +695,7 @@
       "source":"vector",
       "source-layer":"railway",
       "minzoom":0,"maxzoom":17,
-      "filter":["all",["==","class",1],["==","railState",1]],
+      "filter":["all",["==","class",1],["==","railState",1],["!=","snglDbl",1]],
       "paint":{
         "line-color":"rgba(255,255,255,1)",
         "line-width":3,
@@ -673,6 +706,23 @@
         "visibility":"visible"
       },
       "id":"railway-national-bridge-dash"
+    },
+    {
+      "type":"line",
+      "source":"vector",
+      "source-layer":"railway",
+      "minzoom":0,"maxzoom":17,
+      "filter":["all",["==","class",1],["==","railState",1],["==","snglDbl",1]],
+      "paint":{
+        "line-color":"rgba(255,255,255,1)",
+        "line-width":3,
+        "line-dasharray": [2,4,2,0.1]
+      },
+      "layout":{
+        "line-cap":"square",
+        "visibility":"visible"
+      },
+      "id":"railway-national-bridge-dash-dbl"
     },
     {
       "type":"line",
@@ -725,10 +775,58 @@
       "id":"road-highway-number"
     },
     {
+      "type":"circle",
+      "source":"vector",
+      "source-layer":"station",
+      "minzoom":11,"maxzoom":17,
+      "paint":{
+        "circle-color":[
+          "case",
+          ["==", ["get", "class"], 0],"rgba(100,100,100,1)",
+          "rgba(150,150,150,1)"
+        ],
+        "circle-radius":{"stops":[[10,1],[14,10]]}
+      },
+      "layout":{
+        "visibility":"visible"
+      },
+      "id":"station-point"
+    },
+    {
+      "type":"symbol",
+      "source":"vector",
+      "source-layer":"station",
+      "minzoom":11,"maxzoom":17,
+      "paint":{
+        "text-color":"rgba(19,97,69,1)",
+        "text-halo-color":"rgba(255,255,255,1)",
+        "text-halo-width":1
+      },
+      "layout":{
+        "text-size":{"stops":[[12,11],[13,13],[14,15],[15,12],[16,24],[17,42]]},
+        "text-variable-anchor":["top","bottom","left","right"],
+        "text-radial-offset":1,
+        "text-pitch-alignment":"viewport",
+        "text-rotation-alignment":"viewport",
+        "icon-pitch-alignment":"auto",
+        "icon-rotation-alignment":"auto",
+        "text-field":["get","knj"],
+        "text-writing-mode":["vertical","horizontal"],
+        "text-font":["NotoSansCJKjp-Regular"],
+        "symbol-placement":"point",
+        "icon-allow-overlap":true,
+        "text-keep-upright":true,
+        "symbol-z-order":"auto",
+        "text-max-width":100,
+        "visibility":"visible"
+      },
+      "id":"station-label"
+    },
+    {
       "type":"symbol",
       "source":"vector",
       "source-layer":"icon",
-      "minzoom":10,"maxzoom":17,
+      "minzoom":11,"maxzoom":17,
       "paint":{
         "text-color":"rgba(0,0,0,1)",
         "text-halo-color":"rgba(255,255,255,1)",
@@ -829,7 +927,7 @@
       "type":"symbol",
       "source":"vector",
       "source-layer":"text",
-      "minzoom":4,"maxzoom":17,
+      "minzoom":11,"maxzoom":17,
       "filter":["any",["==", "class", 2]],
       "paint":{
         "text-color":"rgba(100,100,100,1)",
@@ -838,7 +936,7 @@
       },
       "layout":{
         "text-size":{"stops":[[12,12],[13,18],[14,24]]},
-        "text-variable-anchor":["center","left","bottom","center","right","top"],
+        "text-variable-anchor":["center","left","bottom","right","top"],
         "text-pitch-alignment":"viewport",
         "text-rotation-alignment":"viewport",
         "icon-pitch-alignment":"auto",
@@ -859,7 +957,7 @@
       "type":"symbol",
       "source":"vector",
       "source-layer":"text",
-      "minzoom":4,"maxzoom":17,
+      "minzoom":11,"maxzoom":17,
       "filter":["any",["==", "class", 0]],
       "paint":{
         "text-color":"rgba(0,0,255,1)",
@@ -898,7 +996,7 @@
       },
       "layout":{
         "text-size":{"stops":[[12,18],[13,24],[14,32]]},
-        "text-variable-anchor":["center","left","bottom","center","right","top"],
+        "text-variable-anchor":["center","left","bottom","right","top"],
         "text-pitch-alignment":"viewport",
         "text-rotation-alignment":"viewport",
         "icon-pitch-alignment":"auto",
