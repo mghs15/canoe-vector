@@ -77,6 +77,62 @@
   </tr>
 </table>
 
+## 駅データ
+
+### レイヤ名
+`station`
+
+### 属性値
+
+`class` *number*
+
+<table>
+  <tr>
+    <td>1</td>
+    <td>官営</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>民営</td>
+  </tr>
+</table>
+
+`knj` *string*
+
+<table>
+  <tr>
+    <td>string</td>
+    <td>駅の漢字表記を文字列として格納</td>
+  </tr>
+</table>
+
+`kana` *string*
+
+<table>
+  <tr>
+    <td>string</td>
+    <td>駅のひらがな表記を文字列として格納</td>
+  </tr>
+</table>
+
+`line` *string*
+
+<table>
+  <tr>
+    <td>string</td>
+    <td>駅の所属路線を文字列として格納</td>
+  </tr>
+</table>
+
+`scale` *number*
+
+<table>
+  <tr>
+    <td>string</td>
+    <td>相対的な駅の重要度を数字として格納（明確な基準は現時点では規定しないが、数字が小さいほど重要度が高いとする。）</td>
+  </tr>
+</table>
+
 ## 道路データ
 
 ### レイヤ名
@@ -101,7 +157,11 @@
   </tr>
   <tr>
     <td>3</td>
-    <td>その他の道路</td>
+    <td>その他の通常道路</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>石段</td>
   </tr>
   <tr>
     <td>1000</td>
@@ -338,7 +398,7 @@
 <table>
   <tr>
     <td>string</td>
-    <td>注記のひらがな表記を文字列として格納<</td>
+    <td>注記のひらがな表記を文字列として格納</td>
   </tr>
 </table>
 
