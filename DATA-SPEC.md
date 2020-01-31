@@ -335,6 +335,7 @@
   <tr><td>"6321"</td><td>広葉樹林</td></tr>
   <tr><td>"6327"</td><td>荒地</td></tr>
   <tr><td>"6341"</td><td>史跡・名勝・天然記念物</td></tr>
+  <tr><td>"6342"</td><td>城（城址）</td></tr>
   <tr><td>"6361"</td><td>港湾</td></tr>
   <tr><td>"6362"</td><td>漁港</td></tr>
   <tr><td>"7102"</td><td>三角点</td></tr>
