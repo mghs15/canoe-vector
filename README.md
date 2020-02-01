@@ -60,22 +60,21 @@ tile-join -f -e vtiles v.mbtiles --no-tile-compression
 ## 配信
 [Mapbox GL JS](https://github.com/mapbox/mapbox-gl-js)を利用して配信。地図記号の表示については、地理院地図VectorのSpriteファイルを利用。
 
-## 感想
+## 感想やメモ
 ### ラスタデータから元データ（GeoJSON）を作成するにあたって
 * QGISでGeoJSONの属性を変更したり、地物を削除したりしようとするとうまくいかない。
 * QGISはさすがGISソフトだけあって便利である。以下は、今回のプロジェクトで重宝したツール。<br>
 特に、「スナップツールバー」でトポロジー編集ができるので、ポリゴン、ライン同士の隙間（重なり）なくすことができる。
-[産総研の吉川さんの解説ページ](https://staff.aist.go.jp/t-yoshikawa/Geomap/QGIS_memo.html)が使い道も含めて非常にわかりやすい。
 	* ジオリファレンス
 	* 「高度なデジタイジングツールバー」の各種機能
-	* 「スナップツールバー」の各種機能
-* 属性値の指定が厄介な（地理院地図は面倒くさいし、QGISは処理がうまくいかない）ことを考えると、描画を分けたい地物については、どんどん別レイヤにしてしまったほうが良いかもしれない。
-  * 現在は、ある程度の属性の組み合わせごとにGeoJSONファイルを別に作成し、mbtilesにする際にマージするようにしている。GeoJSON内で、属性を（ある程度）統一できるので、属性のミスを判別しやすかったり、文字列操作で属性を一括置換したりできるので、管理上便利である。
+	* 「スナップツールバー」の各種機能（[産総研の吉川さんの解説ページ](https://staff.aist.go.jp/t-yoshikawa/Geomap/QGIS_memo.html)にお世話になった。）
+* 属性値の指定が厄介な（地理院地図は面倒くさいし、QGISは処理がうまくいかない）ことを考えると、描画を分けたい地物については、どんどん（ベクトルタイル内で）別レイヤにしてしまったほうが良いかもしれない。
+  * 現在は、ある程度の属性の組み合わせごとにGeoJSONファイルを別に作成し、mbtilesにする際にマージするようにしている。GeoJSON内で、属性を（ある程度）統一できるので、属性のミスを発見しやすかったり、文字列操作で属性を一括置換したりできるので、管理上便利である。
 
 ### GeoJSONからバイナリベクトルタイルを生産するにあたって
 * ポイントデータ以外、Simplificationの影響は考えていない（ベクトル化したデータがもともと粗いため）。
 * 精度を上げていった場合、ラインやポリゴンデータについてもSimplificationを考慮する必要があるだろう。
-* すべての地物を作成したすべてのズームレベルのタイルに入れているが、後々、地物ごとに入れるべきズームレベルを制御する必要があるだろう。（[やり方](https://github.com/mapbox/tippecanoe#zoom-levels)は`-zg -Z4`というように、z:maxzoom～Z:minzoomという形で指定する）。
+* すべての地物をすべてのズームレベルのタイルに入れているが、後々、地物ごとに入れるべきズームレベルを制御する必要があるだろう。（[やり方](https://github.com/mapbox/tippecanoe#zoom-levels)は`-zg -Z4`というように、z:maxzoom～Z:minzoomという形で指定する）。
   * とはいえ、、いまのところは、すべてのデータを入れてもタイルあたり100kbにも満たないので、特にデータの選別については気を配る必要がない。
 * より情報量の多い地図を作成するには、架空データの属性値についても整理しなくてならない。（例：道路の幅員、高架など）
 * もしも、複数のGeoJSONをひとつのレイヤに入れる場合、それぞれのGeoJSONから別のmbtilesを作るのではなく、ひとつのmbtilesにまとめた方が処理が速い。
@@ -90,9 +89,11 @@ tippecanoe -f -l road -o mbtiles/road.mbtiles \
   road-secondary-bridge.geojson \
   road-narrow.geojson
 ```
+* QGISでのトポロジ処理がうまくできると、Tippecanoeで、辺を共有し、属性が同じポリゴンをマージできるようだ。Tippecanoeのオプションには`--coalesce --reorder --no-line-simplification`を指定する。（ラインデータについては、マージされていないようである。要検証）
 
 ### バイナリベクトルタイルを表示するにあたって
-* フォントは、[hfuさんの実装](https://github.com/hfu/tomogala/issues/12)を参考に、['MS Gothic', 'Hiragino Kaku Gothic Pro', 'sans-serif']を指定した。
+* フォントは、[hfuさんの実装](https://github.com/hfu/tomogala/issues/12)を参考に、Mapbox GL JSの`localIdeographFontFamil`の設定に`['MS Gothic', 'Hiragino Kaku Gothic Pro', 'sans-serif']`を指定した。Androidでもそれなりに見える。
+* 注記を代表点方式にするか、その注記が由来する地物に属性値として格納する方式とするか、どちらが性能が良いのか気になる。今のところ、素図の中で書かれていた注記はtextレイヤとして代表点付与方式にし、それ以外の注記（POIや国道？番号など）は、由来する地物の属性値から発生させている。
 
 ## 備考
 TippecanoeはMacまたはLinux環境でないと動きません。しかしながら、Windows10にはWSL（Windows Subsystem for Linux）という、WindowsでLinuxコマンドを利用できるサービスがあります。これを用いることで、Windows10でTippecanoeを扱えるようになりました。ベクトルタイルの作成が非常にやりやすくなったといえます。WSLをオンにして、お好きなUbuntuをMicrosoft Storeから導入した後は、TippecanoeのレポジトリのUbuntu用の説明に従えばOKです。
@@ -110,9 +111,9 @@ https://github.com/mapbox/vector-tile-spec
 https://github.com/mapbox/mapbox-gl-js
 * Qiita- tippecanoe の tile-join の６つの地道な使い方<br>
 https://qiita.com/hfu/items/144bb4384226e7c30000
-* QGISを利用した地質図作成メモ
+* QGISを利用した地質図作成メモ<br>
 https://staff.aist.go.jp/t-yoshikawa/Geomap/QGIS_memo.html
-* localIdeographFontFamily の良いデフォルト設定 #12
+* localIdeographFontFamily の良いデフォルト設定 #12<br>
 https://github.com/hfu/tomogala/issues/12
 
 ## 謝辞
