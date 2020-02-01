@@ -7,11 +7,13 @@
 https://mghs15.github.io/canoe-vector/
 
 ## 元データの準備
+### データ作成のためのツール
 [地理院地図](https://maps.gsi.go.jp/)の作図機能およびQGISを使って、『大帝都市詳図』素図からベクトルデータを作成した。
 
 のちのち[Mapbox Vector Tile](https://github.com/mapbox/vector-tile-spec)に変換することを考え、当初はMapbox Vector Tileのレイヤに相当する架空データごとに１つのGeoJSONファイルに分離して作成したが、
-データ作成・管理上、属性値の組み合わせ（例えば、道路種別＋階層レベル）ごとにGeoJSONを作成するようにしている。。
+データ作成・管理上、属性値の組み合わせ（例えば、道路種別＋階層レベル）ごとにGeoJSONを作成するようにしている。
 
+### データの設計
 基本的に<a href="https://github.com/gsi-cyberjapan/gsimaps-vector-experiment">地理院地図Vector</a>のデータ構造を参考にしつつ、設計している。
 
 実際のデータの内容は、[DATA-SPEC.md](https://github.com/mghs15/canoe-vector/blob/master/DATA-SPEC.md)で検討を行う。
@@ -56,12 +58,22 @@ tile-join -f -e vtiles v.mbtiles --no-tile-compression
 [Mapbox GL JS](https://github.com/mapbox/mapbox-gl-js)を利用して配信。地図記号の表示については、地理院地図VectorのSpriteファイルを利用。
 
 ## 感想
+### ラスタデータから元データ（GeoJSON）を作成するにあたって
+* QGISでGeoJSONの属性を変更したり、地物を削除したりしようとするとうまくいかない。
+* QGISはさすがGISソフトだけあって便利である。以下は、今回のプロジェクトで重宝したツール。<br>
+特に、「スナップツールバー」でトポロジー編集ができるので、ポリゴン、ライン同士の隙間（重なり）なくすことができる。
+[産総研の吉川さんの解説ページ](https://staff.aist.go.jp/t-yoshikawa/Geomap/QGIS_memo.html)が使い道も含めて非常にわかりやすい。
+	* ジオリファレンス
+	* 「高度なデジタイジングツールバー」の各種機能
+	* 「スナップツールバー」の各種機能
+* 属性値の指定が面倒くさい（特に地理院地図の作図機能を利用する場合）ことを考えると、描画を分けたい地物については、どんどん別レイヤにしてしまったほうが良いかもしれない。
+  * 現在は、ある程度の属性の組み合わせごとにGeoJSONファイルを別に作成し、mbtilesにする際にマージするようにしている。属性のミスを判別しやすかったり、文字列操作で属性を一括置換したりできるので、管理上便利である。
+
+### GeoJSONからバイナリベクトルタイルを生産するにあたって
 * ポイントデータ以外、Simplificationの影響は考えていない（ベクトル化したデータがもともと粗いため）。
 * 精度を上げていった場合、ラインやポリゴンデータについてもSimplificationを考慮する必要があるだろう。
 * すべての地物を作成したすべてのズームレベルのタイルに入れているが、後々、地物ごとに入れるべきズームレベルを制御する必要があるだろう。（[やり方](https://github.com/mapbox/tippecanoe#zoom-levels)は`-zg -Z4`というように、z:maxzoom～Z:minzoomという形で指定する）。
   * とはいえ、、いまのところは、すべてのデータを入れてもタイルあたり100kbにも満たないので、特にデータの選別については気を配る必要がない。
-* 属性値の指定が面倒くさい（特に地理院地図の作図機能を利用する場合）ことを考えると、描画を分けたい地物については、どんどん別レイヤにしてしまったほうが良いかもしれない。
-  * 現在は、ある程度の属性の組み合わせごとにGeoJSONファイルを別に作成し、mbtilesにする際にマージするようにしている。属性のミスを判別しやすかったり、文字列操作で属性を一括置換したりできるので、管理上便利である。
 * より情報量の多い地図を作成するには、架空データの属性値についても整理しなくてならない。（例：道路の幅員、高架など）
 * もしも、複数のGeoJSONをひとつのレイヤに入れる場合、それぞれのGeoJSONから別のmbtilesを作るのではなく、ひとつのmbtilesにまとめた方が処理が速い。
 ```
@@ -75,6 +87,7 @@ tippecanoe -f -l road -o mbtiles/road.mbtiles \
   road-secondary-bridge.geojson \
   road-narrow.geojson
 ```
+* フォントは、[hfuさんの実装](https://github.com/hfu/tomogala/issues/12)を参考に、['MS Gothic', 'Hiragino Kaku Gothic Pro', 'sans-serif']を指定した。
 
 ## 備考
 TippecanoeはMacまたはLinux環境でないと動きません。しかしながら、Windows10にはWSL（Windows Subsystem for Linux）という、WindowsでLinuxコマンドを利用できるサービスがあります。これを用いることで、Windows10でTippecanoeを扱えるようになりました。ベクトルタイルの作成が非常にやりやすくなったといえます。WSLをオンにして、お好きなUbuntuをMicrosoft Storeから導入した後は、TippecanoeのレポジトリのUbuntu用の説明に従えばOKです。
@@ -92,6 +105,10 @@ https://github.com/mapbox/vector-tile-spec
 https://github.com/mapbox/mapbox-gl-js
 * Qiita- tippecanoe の tile-join の６つの地道な使い方<br>
 https://qiita.com/hfu/items/144bb4384226e7c30000
+* QGISを利用した地質図作成メモ
+https://staff.aist.go.jp/t-yoshikawa/Geomap/QGIS_memo.html
+* localIdeographFontFamily の良いデフォルト設定 #12
+https://github.com/hfu/tomogala/issues/12
 
 ## 謝辞
 『大帝都市詳図』素図の提供・利用許諾をいただいた拾参號地氏に感謝申し上げます。

@@ -258,7 +258,22 @@
       "source":"vector",
       "source-layer":"building",
       "minzoom":0,"maxzoom":17,
-      "filter":["any",["==","class","a"],["==","class","c"]],
+      "filter":["any",["==","class","a"]],
+      "paint":{
+        "fill-color":"rgba(255,230,190,1)",
+        "fill-outline-color":"rgb(255,135,75)"
+      },
+      "layout":{
+        "visibility":"visible"
+      },
+      "id":"cityarea"
+    },
+    {
+      "type":"fill",
+      "source":"vector",
+      "source-layer":"building",
+      "minzoom":12,"maxzoom":17,
+      "filter":["any",["==","class","c"]],
       "paint":{
         "fill-color":"rgba(255,230,190,1)",
         "fill-outline-color":"rgb(255,135,75)"
