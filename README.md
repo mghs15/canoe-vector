@@ -87,6 +87,8 @@ tippecanoe -f -l road -o mbtiles/road.mbtiles \
   road-secondary-bridge.geojson \
   road-narrow.geojson
 ```
+
+### バイナリベクトルタイルを表示するにあたって
 * フォントは、[hfuさんの実装](https://github.com/hfu/tomogala/issues/12)を参考に、['MS Gothic', 'Hiragino Kaku Gothic Pro', 'sans-serif']を指定した。
 
 ## 備考
